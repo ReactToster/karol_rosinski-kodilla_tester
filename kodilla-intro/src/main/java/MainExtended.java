@@ -12,5 +12,11 @@ public class MainExtended {
         System.out.println(userLetter);
         System.out.println(isAdult);
         System.out.println(userIncome);
+        System.out.println(joinTwoStrings("Hello", "World!"));
+
+    }
+
+    static String joinTwoStrings(String a, String b){
+        return a + b;
     }
 }
