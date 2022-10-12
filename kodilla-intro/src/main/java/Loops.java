@@ -8,6 +8,12 @@ public class Loops {
 
         int[] superArray = new int[] {2, 56, 990, 23, 6, 1023, 543, 89};
         int sum = sumUpElementsOfArray(superArray);
+
+        int i = 0;
+        while (i <= 10) {
+            System.out.println(i);
+            i++;
+        }
     }
 
     private static int sumUpElementsOfArray(int[] array){

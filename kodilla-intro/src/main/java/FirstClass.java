@@ -1,11 +1,13 @@
 public class FirstClass {
     public static void main(String[] args) {
-        System.out.println("Hello, World!");
-
-        if (1 > 2){
-            System.out.println("Matematykę zostawiam wam.");
-        } else {
-            System.out.println("Matematykę zostawcie mi");
-        }
+        Notebook notebook = new Notebook(600, 2500);
+        System.out.println(notebook.weight + " " + notebook.price);
+        notebook.checkPrice();
+        Notebook heavyNotebook = new Notebook(2000, 4500);
+        System.out.println(heavyNotebook.weight + " " + heavyNotebook.price);
+        heavyNotebook.checkPrice();
+        Notebook oldNotebook = new Notebook(1200,650);
+        System.out.println(oldNotebook.weight + " " + oldNotebook.price);
+        oldNotebook.checkPrice();
     }
 }
