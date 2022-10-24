@@ -30,7 +30,7 @@ public class Bank {
         int count = 0;
         for (int i = 0; i < this.cashMachines.length; i++) {
             for (int j = 0; j < this.cashMachines[i].amountOfTransactions(); j++) {
-                if(cashMachines[i].getTransactions()[j] > 0){
+                if(cashMachines[i].getTransaction(j) > 0){
                     count++;
                 }
             }
@@ -42,7 +42,7 @@ public class Bank {
         int count = 0;
         for (int i = 0; i < this.cashMachines.length; i++) {
             for (int j = 0; j < this.cashMachines[i].amountOfTransactions(); j++) {
-                if(cashMachines[i].getTransactions()[j] < 0){
+                if(cashMachines[i].getTransaction(j) < 0){
                     count++;
                 }
             }
@@ -55,8 +55,8 @@ public class Bank {
         int count = 0;
         for (int i = 0; i < this.cashMachines.length; i++) {
             for (int j = 0; j < this.cashMachines[i].amountOfTransactions(); j++) {
-                if(cashMachines[i].getTransactions()[j] > 0){
-                    sum+=cashMachines[i].getTransactions()[j];
+                if(cashMachines[i].getTransaction(j) > 0){
+                    sum+=cashMachines[i].getTransaction(j);
                     count++;
                 }
             }
@@ -73,8 +73,8 @@ public class Bank {
         int count = 0;
         for (int i = 0; i < this.cashMachines.length; i++) {
             for (int j = 0; j < this.cashMachines[i].amountOfTransactions(); j++) {
-                if(cashMachines[i].getTransactions()[j] < 0){
-                    sum+=cashMachines[i].getTransactions()[j];
+                if(cashMachines[i].getTransaction(j) < 0){
+                    sum+=cashMachines[i].getTransaction(j);
                     count++;
                 }
             }

@@ -3,8 +3,8 @@ package com.kodilla.bank.homework;
 public class CashMachine {
     private double[] transactions;
 
-    public double[] getTransactions() {
-        return transactions;
+    public double getTransaction(int index) {
+        return this.transactions[index];
     }
 
     public CashMachine(double[] transactions){
