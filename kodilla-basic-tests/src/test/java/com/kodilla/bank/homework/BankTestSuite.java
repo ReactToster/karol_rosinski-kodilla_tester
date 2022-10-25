@@ -8,79 +8,118 @@ public class BankTestSuite {
 
     @Test
     public void shouldHaveZeroLength() {
-        Bank bank = new Bank(new CashMachine[0]);
+        Bank bank = new Bank();
         assertEquals(0, bank.getCashMachines().length);
     }
 
     @Test
     public void shouldAdd3CashMachinesToArray() {
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{300, 300, 200}));
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addCashMachine(new CashMachine());
+        bank.addCashMachine(new CashMachine());
         assertEquals(3, bank.getCashMachines().length);
     }
 
     @Test
     public void shouldCalculateFinalBalance() {
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{300, 300, 200}));
-        assertEquals(2100, bank.finalBalance());
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(-200);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(200);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(100);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(200);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(200);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(200);
+        assertEquals(1600, bank.finalBalance());
     }
 
     @Test
     public void shouldCalculateAverageDeposit() {
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{-200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-300, 300, 200}));
-        assertEquals(250, bank.averageDeposit());
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(200);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(-400);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(-400);
+        assertEquals(266.66, bank.averageDeposit(), 0.01);
     }
 
     @Test
     public void shouldCorrectlyCalculateAverageDepositIfZeroDeposits(){
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{-200, -300, -200}));
-        bank.addCashMachine(new CashMachine(new double[]{-100, -300, -200}));
-        bank.addCashMachine(new CashMachine(new double[]{-300, -300, -200}));
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(-200);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(-400);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(-400);
         assertEquals(0, bank.averageDeposit());
     }
 
     @Test
     public void shouldCalculateAverageWithdrawal() {
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{-200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-300, 300, 200}));
-        assertEquals(-200, bank.averageWithdrawal());
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(200);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(400);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(-400);
+        assertEquals(-333.33, bank.averageWithdrawal(), 0.01);
     }
 
     @Test
     public void shouldCorrectlyCalculateAverageWithdrawalIfZeroWithdrawals(){
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{300, 300, 200}));
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(200);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(400);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(400);
         assertEquals(0, bank.averageWithdrawal());
     }
 
     @Test
     public void shouldCalculateAmountOfDeposits() {
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{-200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-300, 300, 200}));
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(200);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(400);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(400);
         assertEquals(6, bank.amountOfDeposit());
     }
 
     @Test
     public void shouldCalculateAmountOfWithdrawal() {
-        Bank bank = new Bank(new CashMachine[]{});
-        bank.addCashMachine(new CashMachine(new double[]{-200, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-100, 300, 200}));
-        bank.addCashMachine(new CashMachine(new double[]{-300, 300, 200}));
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(200);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(400);
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(300);
+        bank.addTransactionToCashMachine(-300);
+        bank.addTransactionToCashMachine(-400);
         assertEquals(3, bank.amountOfWithdrawal());
     }
 }
