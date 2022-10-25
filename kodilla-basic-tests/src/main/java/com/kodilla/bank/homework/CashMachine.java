@@ -8,10 +8,12 @@ public class CashMachine {
     }
 
     public void addTransaction(double transaction) {
-        double[] tempTransactions = new double[amountOfTransactions() + 1];
-        System.arraycopy(this.transactions, 0, tempTransactions, 0, amountOfTransactions());
-        tempTransactions[tempTransactions.length - 1] = transaction;
-        this.transactions = tempTransactions;
+        if(transaction != 0){
+            double[] tempTransactions = new double[amountOfTransactions() + 1];
+            System.arraycopy(this.transactions, 0, tempTransactions, 0, amountOfTransactions());
+            tempTransactions[tempTransactions.length - 1] = transaction;
+            this.transactions = tempTransactions;
+        }
     }
     public double balance() {
         double sum = 0;

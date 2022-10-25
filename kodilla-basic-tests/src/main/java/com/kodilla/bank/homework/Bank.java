@@ -7,10 +7,6 @@ public class Bank {
         this.cashMachines = new CashMachine[0];
     }
 
-    public CashMachine[] getCashMachines() {
-        return cashMachines;
-    }
-
     public void addCashMachine(CashMachine cashMachine) {
         CashMachine[] tempCashMachines = new CashMachine[this.cashMachines.length + 1];
         System.arraycopy(this.cashMachines, 0, tempCashMachines, 0, this.cashMachines.length);
@@ -19,11 +15,15 @@ public class Bank {
     }
 
     public void addTransactionToCashMachine(double transaction) {
-        this.cashMachines[this.cashMachines.length-1].addTransaction(transaction);
+        if (this.cashMachines.length != 0){
+            this.cashMachines[this.cashMachines.length-1].addTransaction(transaction);
+        }
     }
 
     public void addTransactionToCashMachine(double transaction, int index) {
-        this.cashMachines[index].addTransaction(transaction);
+        if (this.cashMachines.length != 0){
+            this.cashMachines[index].addTransaction(transaction);
+        }
     }
 
     public double finalBalance() {
@@ -46,6 +46,14 @@ public class Bank {
         int count = 0;
         for (int i = 0; i < this.cashMachines.length; i++) {
             count += this.cashMachines[i].amountOfWithdrawal();
+        }
+        return count;
+    }
+
+    public int amountOfTransactions() {
+        int count = 0;
+        for (int i = 0; i < this.cashMachines.length; i++) {
+            count += this.cashMachines[i].amountOfTransactions();
         }
         return count;
     }
@@ -76,5 +84,9 @@ public class Bank {
         } else {
             return sum/amountOfWithdrawal;
         }
+    }
+
+    public int amountOfCashMachines() {
+        return this.cashMachines.length;
     }
 }

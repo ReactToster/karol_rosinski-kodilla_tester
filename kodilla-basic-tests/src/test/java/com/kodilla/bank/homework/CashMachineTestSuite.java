@@ -30,4 +30,11 @@ public class CashMachineTestSuite {
         cashMachine.addTransaction(200);
         assertEquals(2, cashMachine.amountOfTransactions());
     }
+
+    @Test
+    public void shouldNotAddTransactionIfTransactionIs0(){
+        CashMachine cashMachine = new CashMachine();
+        cashMachine.addTransaction(0);
+        assertEquals(0, cashMachine.amountOfTransactions());
+    }
 }

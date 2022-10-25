@@ -9,7 +9,7 @@ public class BankTestSuite {
     @Test
     public void shouldHaveZeroLength() {
         Bank bank = new Bank();
-        assertEquals(0, bank.getCashMachines().length);
+        assertEquals(0, bank.amountOfCashMachines());
     }
 
     @Test
@@ -18,7 +18,7 @@ public class BankTestSuite {
         bank.addCashMachine(new CashMachine());
         bank.addCashMachine(new CashMachine());
         bank.addCashMachine(new CashMachine());
-        assertEquals(3, bank.getCashMachines().length);
+        assertEquals(3, bank.amountOfCashMachines());
     }
 
     @Test
@@ -121,5 +121,20 @@ public class BankTestSuite {
         bank.addTransactionToCashMachine(-300);
         bank.addTransactionToCashMachine(-400);
         assertEquals(3, bank.amountOfWithdrawal());
+    }
+
+    @Test
+    public void shouldNotAddTransactionToCashMachineIfTransactionIs0(){
+        Bank bank = new Bank();
+        bank.addCashMachine(new CashMachine());
+        bank.addTransactionToCashMachine(0);
+        assertEquals(0, bank.amountOfTransactions());
+    }
+
+    @Test
+    public void shouldNotAddTransactionToCashMachineIfThereIsNoCashMachine(){
+        Bank bank = new Bank();
+        bank.addTransactionToCashMachine(1000);
+        assertEquals(0, bank.amountOfCashMachines());
     }
 }
