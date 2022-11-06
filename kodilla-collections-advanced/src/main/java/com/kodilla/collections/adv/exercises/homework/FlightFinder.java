@@ -18,6 +18,14 @@ public class FlightFinder {
     }
 
     public List<Flight> findFlightsTo(String arrival){
-        return Collections.emptyList();
+        List<Flight> result = new ArrayList<>();
+        List<Flight> flights = FlightRepository.getFlightsTable();
+        for (Flight flight :
+                flights) {
+            if (flight.getArrival() == arrival) {
+                result.add(flight);
+            }
+        }
+        return result;
     }
 }
