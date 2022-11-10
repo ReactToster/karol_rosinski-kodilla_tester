@@ -32,4 +32,13 @@ public class UsersManager {
 
         return users;
     }
+
+    public static List<User> getUsersWithNumberOfPostsLesserThanNumber(int numberOfPosts) {
+        List<User> users = UserRepository.getUsersList()
+                .stream()
+                .filter(user -> user.getNumberOfPost() < numberOfPosts)
+                .collect(Collectors.toList());
+
+        return users;
+    }
 }

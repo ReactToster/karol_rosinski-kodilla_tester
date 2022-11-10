@@ -43,4 +43,15 @@ class UsersManagerTest {
         expectedUsers.add(new User("Mike Ehrmantraut", 57, 0, "Security"));
         assertEquals(expectedUsers, users);
     }
+
+    @Test
+    public void testIfGetUsersWithNumberOfPostsLesserThanGivenValueReturnsCorrectUsers() {
+        // when
+        users = UsersManager.getUsersWithNumberOfPostsLesserThanNumber(5);
+        // then
+        expectedUsers.add(new User("Gus Firing", 49, 0, "Board"));
+        expectedUsers.add(new User("Gale Boetticher", 44, 2, "Chemists"));
+        expectedUsers.add(new User("Mike Ehrmantraut", 57, 0, "Security"));
+        assertEquals(expectedUsers, users);
+    }
 }
