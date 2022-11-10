@@ -6,13 +6,13 @@ public class Stamp {
     private String name;
     private double width;
     private double height;
-    private boolean stamped;
+    private boolean isStamped;
 
-    public Stamp(String name, double width, double height, boolean stamped) {
+    public Stamp(String name, double width, double height, boolean isStamped) {
         this.name = name;
         this.width = width;
         this.height = height;
-        this.stamped = stamped;
+        this.isStamped = isStamped;
     }
 
     @Override
@@ -21,7 +21,7 @@ public class Stamp {
                 "name='" + name + '\'' +
                 ", width=" + width +
                 ", height=" + height +
-                ", stamped=" + stamped +
+                ", isStamped=" + isStamped +
                 '}';
     }
 
@@ -30,11 +30,11 @@ public class Stamp {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Stamp stamp = (Stamp) o;
-        return Double.compare(stamp.width, width) == 0 && Double.compare(stamp.height, height) == 0 && stamped == stamp.stamped && Objects.equals(name, stamp.name);
+        return Double.compare(stamp.width, width) == 0 && Double.compare(stamp.height, height) == 0 && isStamped == stamp.isStamped && Objects.equals(name, stamp.name);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(name, width, height, stamped);
+        return Objects.hash(name, width, height, isStamped);
     }
 }
