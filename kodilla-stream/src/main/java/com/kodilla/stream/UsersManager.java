@@ -1,5 +1,6 @@
 package com.kodilla.stream;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,5 +22,14 @@ public class UsersManager {
                 .collect(Collectors.toList());
 
         return usernames;
+    }
+
+    public static List<User> getUsersOlderThanGivenAge(int age) {
+        List<User> users = UserRepository.getUsersList()
+                .stream()
+                .filter(user -> user.getAge() > age)
+                .collect(Collectors.toList());
+
+        return users;
     }
 }
