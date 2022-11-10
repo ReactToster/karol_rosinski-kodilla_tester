@@ -1,5 +1,6 @@
 package com.kodilla.collections.adv.exercises.homework;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -8,11 +9,17 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FlightFinderTestSuite {
+    private List<Flight> flights;
+    private FlightFinder flightFinder;
+
+    @BeforeEach
+    public void setUp(){
+       flights = new ArrayList<>();
+       flightFinder = new FlightFinder();
+    }
+
     @Test
     public void TestFindFlightsFrom(){
-        // given
-        List<Flight> flights = new ArrayList<>();
-        FlightFinder flightFinder = new FlightFinder();
         // when
         flights = flightFinder.findFlightsFrom("Gdańsk");
         // then
@@ -24,9 +31,6 @@ class FlightFinderTestSuite {
 
     @Test
     public void TestFindFlightsTo() {
-        // given
-        List<Flight> flights = new ArrayList<>();
-        FlightFinder flightFinder = new FlightFinder();
         // when
         flights = flightFinder.findFlightsTo("Barcelona");
         // then
