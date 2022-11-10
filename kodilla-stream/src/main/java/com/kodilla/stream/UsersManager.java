@@ -13,7 +13,7 @@ public class UsersManager {
         return user.getUsername();
     }
 
-    private static List<String> filterChemistsGroupUsernames() {
+    public static List<String> filterChemistsGroupUsernames() {
         List<String> usernames = UserRepository.getUsersList()
                 .stream()
                 .filter(user -> user.getGroup().equals("Chemists"))
