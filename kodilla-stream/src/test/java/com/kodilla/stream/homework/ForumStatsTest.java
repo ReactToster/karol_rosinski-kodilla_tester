@@ -1,7 +1,6 @@
 package com.kodilla.stream.homework;
 
 import com.kodilla.stream.User;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -30,6 +29,6 @@ class ForumStatsTest {
         // when
         double averageNumberOfPosts = forumStats.calculateAverageNumberOfPostsForUsersOlderOrEqualToGivenAge(testUsers);
         // then
-        Assertions.assertEquals(204, averageNumberOfPosts, 0.001);
+        assertEquals(204, averageNumberOfPosts, 0.001);
     }
 }
