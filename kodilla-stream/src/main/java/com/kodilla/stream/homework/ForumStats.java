@@ -17,24 +17,22 @@ public class ForumStats {
     }
 
     public double calculateAverageNumberOfPostsForUsersOlderOrEqualToGivenAge(List<User> users) {
-        double averageNumberOfPosts = users
+
+        return users
                 .stream()
                 .filter(user -> user.getAge() >= age)
-                .mapToInt(user -> user.getNumberOfPost())
+                .mapToInt(User::getNumberOfPost)
                 .average()
-                .getAsDouble();
-
-        return averageNumberOfPosts;
+                .orElse(0.0);
     }
 
     public double calculateAverageNumberOfPostsForUsersYoungerThanGivenAge(List<User> users) {
-        double averageNumberOfPosts = users
+
+        return users
                 .stream()
                 .filter(user -> user.getAge() < age)
-                .mapToInt(user -> user.getNumberOfPost())
+                .mapToInt(User::getNumberOfPost)
                 .average()
-                .getAsDouble();
-
-        return averageNumberOfPosts;
+                .orElse(0.0);
     }
 }
