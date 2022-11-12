@@ -21,4 +21,9 @@ public class Application {
             );
         }
     }
+
+    public String getStudentsTeacher(Student student) {
+        Optional<Teacher> optionalTeacher = Optional.ofNullable(student.getTeacher());
+        return optionalTeacher.orElse(new Teacher("<undefined>")).getName();
+    }
 }
