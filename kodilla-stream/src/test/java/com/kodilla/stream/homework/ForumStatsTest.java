@@ -31,4 +31,12 @@ class ForumStatsTest {
         // then
         assertEquals(204, averageNumberOfPosts, 0.001);
     }
+
+    @Test
+    public void testCalculateAverageNumberOfPostsForUsersYoungerThanGivenAge() {
+        // when
+        double averageNumberOfPosts = forumStats.calculateAverageNumberOfPostsForUsersYoungerThanGivenAge(testUsers);
+        // then
+        assertEquals(238.5, averageNumberOfPosts, 0.001);
+    }
 }

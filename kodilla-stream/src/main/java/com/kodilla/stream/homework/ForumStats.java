@@ -6,7 +6,7 @@ import com.kodilla.stream.UserRepository;
 import java.util.List;
 
 public class ForumStats {
-    private int age = 40;
+    private final int age = 40;
     public static void main(String[] args) {
         ForumStats forumStats = new ForumStats();
 
@@ -28,6 +28,13 @@ public class ForumStats {
     }
 
     public double calculateAverageNumberOfPostsForUsersYoungerThanGivenAge(List<User> users) {
-        return 0.0;
+        double averageNumberOfPosts = users
+                .stream()
+                .filter(user -> user.getAge() < age)
+                .mapToInt(user -> user.getNumberOfPost())
+                .average()
+                .getAsDouble();
+
+        return averageNumberOfPosts;
     }
 }
