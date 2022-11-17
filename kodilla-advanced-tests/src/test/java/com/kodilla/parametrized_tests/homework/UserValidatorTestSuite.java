@@ -18,13 +18,31 @@ class UserValidatorTestSuite {
 
     @ParameterizedTest
     @ValueSource(strings = {"ba", "s", "@@@", "???", "name!!"})
-    public void shouldReturnFalseForIncorrectUsername(String input){
+    public void shouldReturnFalseForIncorrectUsername(String input) {
         assertFalse(userValidator.validateUsername(input));
     }
 
     @ParameterizedTest
     @EmptySource
-    public void shouldReturnFalseEmptyUsername(String input){
+    public void shouldReturnFalseForEmptyUsername(String input) {
         assertFalse(userValidator.validateUsername(input));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"black.adam@gmail.com", "111.222@222.com", "---.___@---.com", "adam@gmail.com"})
+    public void shouldReturnTrueForCorrectEmail(String input) {
+        assertTrue(userValidator.validateEmail(input));
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"??.??@gmail.com", "@222.com", "aaaaa@.com", "aaaaa@", "adam", "@"})
+    public void shouldReturnFalseForIncorrectEmail(String input) {
+        assertFalse(userValidator.validateEmail(input));
+    }
+
+    @ParameterizedTest
+    @EmptySource
+    public void shouldReturnFalseForEmptyEmail(String input) {
+        assertFalse(userValidator.validateEmail(input));
     }
 }
