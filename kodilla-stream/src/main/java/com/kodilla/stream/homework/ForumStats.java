@@ -17,7 +17,6 @@ public class ForumStats {
     }
 
     public double calculateAverageNumberOfPostsForUsersOlderOrEqualToGivenAge(List<User> users) {
-
         return users
                 .stream()
                 .filter(user -> user.getAge() >= age)
@@ -27,7 +26,6 @@ public class ForumStats {
     }
 
     public double calculateAverageNumberOfPostsForUsersYoungerThanGivenAge(List<User> users) {
-
         return users
                 .stream()
                 .filter(user -> user.getAge() < age)
