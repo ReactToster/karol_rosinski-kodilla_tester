@@ -1,6 +1,7 @@
 package com.kodilla.parametrized_tests.homework;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
 
@@ -8,6 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class GamblingMachineTest {
     private GamblingMachine gamblingMachine;
@@ -32,5 +34,25 @@ class GamblingMachineTest {
         // when
         // then
         assertDoesNotThrow(() -> gamblingMachine.howManyWins(numbers));
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/invalidGamblingMachineNumbers.csv", numLinesToSkip = 1)
+    public void testHowManyWins_withException(int invalidNumber1, int invalidNumber2, int invalidNumber3, int invalidNumber4, int invalidNumber5, int invalidNumber6) {
+        // given
+        numbers.add(invalidNumber1);
+        numbers.add(invalidNumber2);
+        numbers.add(invalidNumber3);
+        numbers.add(invalidNumber4);
+        numbers.add(invalidNumber5);
+        numbers.add(invalidNumber6);
+        // when
+        // then
+        assertThrows(InvalidNumbersException.class, () -> gamblingMachine.howManyWins(numbers));
+    }
+
+    @Test
+    public void shouldThrowExceptionWhenSizeIsNotCorrect() {
+        assertThrows(InvalidNumbersException.class, () -> gamblingMachine.howManyWins(numbers));
     }
 }
