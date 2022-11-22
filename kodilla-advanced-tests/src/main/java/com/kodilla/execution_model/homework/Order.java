@@ -1,6 +1,7 @@
 package com.kodilla.execution_model.homework;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Objects;
 
 public class Order {
@@ -10,7 +11,7 @@ public class Order {
 
     public Order(double orderValue, String orderDate, String buyerLogin) {
         this.orderValue = orderValue;
-        this.orderDate = LocalDate.parse(orderDate);
+        this.orderDate = LocalDate.parse(orderDate, DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         this.buyerLogin = buyerLogin;
     }
 
