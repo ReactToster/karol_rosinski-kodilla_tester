@@ -19,4 +19,10 @@ public class Shop {
                 .filter(order -> order.getOrderDate().compareTo(LocalDate.now().minusYears(2)) > 0 )
                 .collect(Collectors.toSet());
     }
+
+    public Set<Order> getOrdersWithinRange(LocalDate localDateStart, LocalDate localDateFinish) {
+        return orders.stream()
+                .filter(order -> order.getOrderDate().isAfter(localDateStart) && order.getOrderDate().isBefore(localDateFinish))
+                .collect(Collectors.toSet());
+    }
 }
