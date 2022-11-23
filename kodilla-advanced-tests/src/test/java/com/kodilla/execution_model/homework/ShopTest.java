@@ -27,6 +27,11 @@ class ShopTest {
     }
 
     @Test
+    public void testAddOrderToShop() {
+        assertEquals(3, shop.getAmountOfOrders());
+    }
+
+    @Test
     public void shouldReturnOrdersNotOlderThan2Years() {
         // when
         Set<Order> shopOrdersSince2Years = shop.getOrdersSince2Years();
