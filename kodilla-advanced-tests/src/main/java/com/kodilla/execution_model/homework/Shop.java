@@ -26,6 +26,12 @@ public class Shop {
                 .collect(Collectors.toSet());
     }
 
+    public Set<Order> getOrdersWithinRange(double minOrderValue, double maxOrderValue) {
+        return orders.stream()
+                .filter(order -> order.getOrderValue() >= minOrderValue && order.getOrderValue() <= maxOrderValue)
+                .collect(Collectors.toSet());
+    }
+
     public int getAmountOfOrders() { return orders.size(); }
 
     public double calculateTotalValue() {
