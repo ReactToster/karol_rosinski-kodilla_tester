@@ -45,4 +45,9 @@ class ShopTest {
         assertTrue(shopOrdersSince2Years.contains(orderTest2));
         assertEquals(2, shopOrdersSince2Years.size());
     }
+
+    @Test
+    public void shouldCalculateTotalValueOfOrders() {
+        assertEquals(460.0, shop.calculateTotalValue());
+    }
 }

@@ -25,4 +25,12 @@ public class Shop {
                 .filter(order -> order.getOrderDate().isAfter(localDateStart) && order.getOrderDate().isBefore(localDateFinish))
                 .collect(Collectors.toSet());
     }
+
+    public int getAmountOfOrders() { return orders.size(); }
+
+    public double calculateTotalValue() {
+        return orders.stream()
+                .mapToDouble(order -> order.getOrderValue())
+                .sum();
+    }
 }
