@@ -12,14 +12,12 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ShopTest {
     private Shop shop;
-    private DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-    private LocalDate testLocalDateStart = LocalDate.parse("01-01-2021", dateTimeFormatter);
-    private LocalDate testLocalDateFinish = LocalDate.parse("01-01-2023", dateTimeFormatter);
-    private double minOrderValue = 80.0;
-    private double maxOrderValue = 120.0;
-    private Order orderTest1 = new Order(180.0, "10-10-2022", "dark_knight86");
-    private Order orderTest2 = new Order(100.0, "11-12-2021", "kitty325");
-    private Order orderTest3 = new Order(180.0, "01-05-2015", "test_test");
+    private final DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+    private final LocalDate testLocalDateStart = LocalDate.parse("01-01-2021", dateTimeFormatter);
+    private final LocalDate testLocalDateFinish = LocalDate.parse("01-01-2023", dateTimeFormatter);
+    private final Order orderTest1 = new Order(180.0, "10-10-2022", "dark_knight86");
+    private final Order orderTest2 = new Order(100.0, "11-12-2021", "kitty325");
+    private final Order orderTest3 = new Order(180.0, "01-05-2015", "test_test");
     @BeforeEach
     public void setUp() {
         shop = new Shop();
@@ -46,15 +44,18 @@ class ShopTest {
     @Test
     public void shouldReturnOrdersWithinGivenRangeOfDates() {
         // when
-        Set<Order> shopOrdersSince2Years = shop.getOrdersWithinRange(testLocalDateStart, testLocalDateFinish);
+        Set<Order> shopOrdersRangeOFDates = shop.getOrdersWithinRange(testLocalDateStart, testLocalDateFinish);
         // then
-        assertTrue(shopOrdersSince2Years.contains(orderTest1));
-        assertTrue(shopOrdersSince2Years.contains(orderTest2));
-        assertEquals(2, shopOrdersSince2Years.size());
+        assertTrue(shopOrdersRangeOFDates.contains(orderTest1));
+        assertTrue(shopOrdersRangeOFDates.contains(orderTest2));
+        assertEquals(2, shopOrdersRangeOFDates.size());
     }
 
     @Test
     public void shouldReturnOrdersWithinGivenRangeOfMinAndMaxOrderValue() {
+        // given
+        double minOrderValue = 80.0;
+        double maxOrderValue = 120.0;
         // when
         Set<Order> shopOrdersRangeOfValues = shop.getOrdersWithinRange(minOrderValue, maxOrderValue);
         // then

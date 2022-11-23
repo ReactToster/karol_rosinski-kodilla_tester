@@ -36,7 +36,7 @@ public class Shop {
 
     public double calculateTotalValue() {
         return orders.stream()
-                .mapToDouble(order -> order.getOrderValue())
+                .mapToDouble(Order::getOrderValue)
                 .sum();
     }
 }
