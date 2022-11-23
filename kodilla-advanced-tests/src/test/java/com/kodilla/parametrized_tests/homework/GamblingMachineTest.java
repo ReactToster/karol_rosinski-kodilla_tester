@@ -36,7 +36,7 @@ class GamblingMachineTest {
     }
 
     @ParameterizedTest
-    @CsvFileSource(resources = "/invalidGamblingMachineNumbers.csv", numLinesToSkip = 1)
+    @CsvFileSource(resources = "/invalidGamblingMachineNumbers.csv", numLinesToSkip = 1, delimiter = ':')
     public void testHowManyWins_withException(String stringInvalidNumbers) {
         // given
         String[] strings = stringInvalidNumbers.split(",");
