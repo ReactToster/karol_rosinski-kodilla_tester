@@ -13,7 +13,7 @@ public class WeatherNotificationService {
     }
 
     public void sendToAll(Notification notification) {
-
+        localizationUserMap.forEach((localization, users) -> users.forEach(user -> user.receive(notification)));
     }
 
     public void sendToUsersSubscribedToLocalization(Localization localization, Notification notification) {

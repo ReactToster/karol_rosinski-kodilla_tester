@@ -7,16 +7,23 @@ import org.mockito.Mockito;
 class WeatherNotificationServiceTest {
     private WeatherNotificationService weatherNotificationService;
     private User user;
+    private User user2;
+    private User user3;
     private Notification notification;
     private Localization localization;
+    private Localization localization2;
 
     @BeforeEach
     public void setUp() {
         weatherNotificationService = new WeatherNotificationService();
         user = Mockito.mock(User.class);
+        user2 = Mockito.mock(User.class);
+        user3 = Mockito.mock(User.class);
         notification = Mockito.mock(Notification.class);
         localization = Mockito.mock(Localization.class);
+        localization2 = Mockito.mock(Localization.class);
         weatherNotificationService.addLocalization(localization);
+        weatherNotificationService.addLocalization(localization2);
     }
 
     @Test
@@ -35,5 +42,18 @@ class WeatherNotificationServiceTest {
     public void unsubscribedToLocalizationShouldNotBeNotified() {
         weatherNotificationService.sendToUsersSubscribedToLocalization(localization, notification);
         Mockito.verify(user, Mockito.never()).receive(notification);
+    }
+
+    @Test
+    public void subscribedToAnyLocalizationShouldReceiveNotificationForAll() {
+        weatherNotificationService.subscribeToLocalization(localization, user);
+        weatherNotificationService.subscribeToLocalization(localization, user2);
+        weatherNotificationService.subscribeToLocalization(localization2, user3);
+
+        weatherNotificationService.sendToAll(notification);
+
+        Mockito.verify(user, Mockito.times(1)).receive(notification);
+        Mockito.verify(user2, Mockito.times(1)).receive(notification);
+        Mockito.verify(user3, Mockito.times(1)).receive(notification);
     }
 }
