@@ -25,9 +25,15 @@ class WeatherNotificationServiceTest {
     }
 
     @Test
-    public void SubscribedToLocalizationShouldBeNotified() {
+    public void subscribedToLocalizationShouldBeNotified() {
         weatherNotificationService.subscribeToLocalization(localization, user);
         weatherNotificationService.sendToUsersSubscribedToLocalization(localization, notification);
         Mockito.verify(user, Mockito.times(1)).receive(notification);
+    }
+
+    @Test
+    public void unsubscribedToLocalizationShouldNotBeNotified() {
+        weatherNotificationService.sendToUsersSubscribedToLocalization(localization, notification);
+        Mockito.verify(user, Mockito.never()).receive(notification);
     }
 }
