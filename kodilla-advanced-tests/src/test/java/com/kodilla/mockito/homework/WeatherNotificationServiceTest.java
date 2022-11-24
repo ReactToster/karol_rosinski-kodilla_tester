@@ -34,12 +34,17 @@ class WeatherNotificationServiceTest {
     @Test
     public void subscribedToLocalizationShouldBeNotified() {
         weatherNotificationService.subscribeToLocalization(localization, user);
+        weatherNotificationService.subscribeToLocalization(localization2, user2);
         weatherNotificationService.sendToUsersSubscribedToLocalization(localization, notification);
+        weatherNotificationService.sendToUsersSubscribedToLocalization(localization2, notification);
+
         Mockito.verify(user, Mockito.times(1)).receive(notification);
+        Mockito.verify(user2, Mockito.times(1)).receive(notification);
     }
 
     @Test
     public void unsubscribedToLocalizationShouldNotBeNotified() {
+        weatherNotificationService.subscribeToLocalization(localization2, user);
         weatherNotificationService.sendToUsersSubscribedToLocalization(localization, notification);
         Mockito.verify(user, Mockito.never()).receive(notification);
     }
@@ -55,5 +60,26 @@ class WeatherNotificationServiceTest {
         Mockito.verify(user, Mockito.times(1)).receive(notification);
         Mockito.verify(user2, Mockito.times(1)).receive(notification);
         Mockito.verify(user3, Mockito.times(1)).receive(notification);
+    }
+
+    @Test
+    public void afterUnsubscribingUserShouldNotGetNotificationForLocalization() {
+        weatherNotificationService.subscribeToLocalization(localization, user);
+        weatherNotificationService.unsubscribeFromLocalization(localization, user);
+        weatherNotificationService.sendToUsersSubscribedToLocalization(localization, notification);
+
+        Mockito.verify(user, Mockito.never()).receive(notification);
+    }
+
+    @Test
+    public void userWhichUnsubscribedToEveryLocalizationShouldNotGetNotificationForAll() {
+        weatherNotificationService.subscribeToLocalization(localization, user);
+        weatherNotificationService.subscribeToLocalization(localization2, user);
+
+        weatherNotificationService.unsubscribeFromAll(user);
+
+        weatherNotificationService.sendToAll(notification);
+
+        Mockito.verify(user, Mockito.never()).receive(notification);
     }
 }

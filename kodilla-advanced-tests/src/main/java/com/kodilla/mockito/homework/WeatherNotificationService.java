@@ -25,9 +25,7 @@ public class WeatherNotificationService {
         localizationUserMap.put(localization, new HashSet<>());
     }
 
-    public void removeLocalization(Localization localization) {
-
-    }
+    public void removeLocalization(Localization localization) { localizationUserMap.remove(localization); }
 
     public void subscribeToLocalization(Localization localization, User user) {
 //        localizationUserMap.put(localization, user);
@@ -35,10 +33,10 @@ public class WeatherNotificationService {
     }
 
     public void unsubscribeFromLocalization(Localization localization, User user) {
-
+        localizationUserMap.get(localization).remove(user);
     }
 
     public void unsubscribeFromAll(User user) {
-
+        localizationUserMap.forEach((localization, users) -> users.remove(user));
     }
 }
