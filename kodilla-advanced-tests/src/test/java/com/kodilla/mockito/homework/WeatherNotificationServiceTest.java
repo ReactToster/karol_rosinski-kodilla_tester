@@ -15,13 +15,14 @@ class WeatherNotificationServiceTest {
 
     @BeforeEach
     public void setUp() {
-        weatherNotificationService = new WeatherNotificationService();
+        weatherNotificationService = Mockito.spy(new WeatherNotificationService());
         user = Mockito.mock(User.class);
         user2 = Mockito.mock(User.class);
         user3 = Mockito.mock(User.class);
         notification = Mockito.mock(Notification.class);
         localization = Mockito.mock(Localization.class);
         localization2 = Mockito.mock(Localization.class);
+
         weatherNotificationService.addLocalization(localization);
         weatherNotificationService.addLocalization(localization2);
     }
@@ -29,6 +30,8 @@ class WeatherNotificationServiceTest {
     @Test
     public void userShouldAbleToSubscribeToLocalization() {
         weatherNotificationService.subscribeToLocalization(localization, user);
+
+        Mockito.verify(weatherNotificationService).subscribeToLocalization(localization, user);
     }
 
     @Test
@@ -81,5 +84,17 @@ class WeatherNotificationServiceTest {
         weatherNotificationService.sendToAll(notification);
 
         Mockito.verify(user, Mockito.never()).receive(notification);
+    }
+
+    @Test
+    public void testRemoveLocalization() {
+        weatherNotificationService.removeLocalization(localization);
+
+        Mockito.verify(weatherNotificationService, Mockito.times(1)).removeLocalization(localization);
+    }
+
+    @Test
+    public void testAddLocalization() {
+        Mockito.verify(weatherNotificationService, Mockito.times(1)).addLocalization(localization);
     }
 }

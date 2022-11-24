@@ -6,18 +6,15 @@ import java.util.Map;
 import java.util.Set;
 
 public class WeatherNotificationService {
-    //Map<Localization, User> localizationUserMap = new HashMap<>();
     Map<Localization, Set<User>> localizationUserMap = new HashMap<>();
 
-    public WeatherNotificationService() {
-    }
-
     public void sendToAll(Notification notification) {
-        localizationUserMap.forEach((localization, users) -> users.forEach(user -> user.receive(notification)));
+        localizationUserMap.forEach(
+                (localization, users) -> users.forEach(user -> user.receive(notification))
+        );
     }
 
     public void sendToUsersSubscribedToLocalization(Localization localization, Notification notification) {
-//        localizationUserMap.get(localization).receive(notification);
         localizationUserMap.get(localization).forEach(user -> user.receive(notification));
     }
 
@@ -27,14 +24,9 @@ public class WeatherNotificationService {
 
     public void removeLocalization(Localization localization) { localizationUserMap.remove(localization); }
 
-    public void subscribeToLocalization(Localization localization, User user) {
-//        localizationUserMap.put(localization, user);
-        localizationUserMap.get(localization).add(user);
-    }
+    public void subscribeToLocalization(Localization localization, User user) { localizationUserMap.get(localization).add(user); }
 
-    public void unsubscribeFromLocalization(Localization localization, User user) {
-        localizationUserMap.get(localization).remove(user);
-    }
+    public void unsubscribeFromLocalization(Localization localization, User user) { localizationUserMap.get(localization).remove(user); }
 
     public void unsubscribeFromAll(User user) {
         localizationUserMap.forEach((localization, users) -> users.remove(user));
