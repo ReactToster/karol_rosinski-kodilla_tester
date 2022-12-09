@@ -16,7 +16,7 @@ public class CarPicker {
 
     @Bean
     public Car pickCar() {
-        Car car = new DefaultCar();
+        Car car;
         if (LocalDate.now().isAfter(LocalDate.parse("01-12-2022", formatter))
                 && LocalDate.now().isBefore(LocalDate.parse("19-03-2023", formatter)))
             car = new SUV();
@@ -30,6 +30,8 @@ public class CarPicker {
                         LocalDate.now().isBefore(LocalDate.parse("30-11-2023", formatter)))
         )
             car = new Sedan();
+        else
+            car = new DefaultCar();
 
         return car;
     }
