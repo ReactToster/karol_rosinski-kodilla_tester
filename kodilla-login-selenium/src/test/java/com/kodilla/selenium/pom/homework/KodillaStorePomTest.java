@@ -19,6 +19,7 @@ public class KodillaStorePomTest {
         driver = new ChromeDriver();
         kodillaStorePom = new KodillaStorePom(driver);
         driver.navigate().to("https://kodilla.com/pl/test/store");
+        driver.manage().window().maximize();
     }
 
     @Test

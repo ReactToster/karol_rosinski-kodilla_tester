@@ -1,5 +1,6 @@
 package com.kodilla.selenium.allegro;
 
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -15,9 +16,10 @@ public class AllegroTestingApp {
     public static void main(String[] args) {
         Duration waitDelayListOfObjects = Duration.ofSeconds(15);
 
-        System.setProperty("webdriver.chrome.driver", "/Users/karolrosinski/Documents/Development/Kodilla/chromedriver");
+        WebDriverManager.chromedriver().setup();
         WebDriver driver = new ChromeDriver();
         driver.get("https://allegro.pl/");
+        driver.manage().window().maximize();
 
         WebElement cookieDialog = driver.findElement(By.cssSelector("#opbox-gdpr-consents-modal > div > div[class*=dg8gwj] > div > div[class*=msts_pt] > button[data-role=accept-consent]"));
         cookieDialog.click();

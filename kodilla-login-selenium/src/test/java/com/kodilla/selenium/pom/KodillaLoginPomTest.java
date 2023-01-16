@@ -16,6 +16,7 @@ public class KodillaLoginPomTest {
     public void setup() {
         driver = new ChromeDriver();
         driver.navigate().to("https://kodilla.com/pl/test/login");
+        driver.manage().window().maximize();
         kodillaLoginPom = new KodillaLoginPom(driver);
     }
 
