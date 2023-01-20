@@ -15,6 +15,12 @@ public class WalletWithdrawalProtectionSteps implements En {
         When("I withdraw ${int}", (Integer amount) -> {
             cashier.withdraw(wallet, amount);
         });
+        When("I check the balance of my wallet", () -> {
+
+        });
+        Then("I should see that the balance is ${int}", (Integer amount) -> {
+            Assertions.assertEquals(amount, wallet.getBalance());
+        });
         Then("nothing should be dispensed", () -> {
             Assertions.assertEquals(0, cashSlot.getContents());
         });
