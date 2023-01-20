@@ -9,9 +9,10 @@ public class Cashier {
     }
 
     public void withdraw(Wallet wallet, int amount) {
-        if (wallet.getBalance() >= amount && amount > 0)
+        if (wallet.getBalance() >= amount && amount > 0) {
+            wallet.debit(amount);
             cashSlot.dispense(amount);
-        else
+        } else
             this.errorMessage = "Incorrect amount!";
     }
 

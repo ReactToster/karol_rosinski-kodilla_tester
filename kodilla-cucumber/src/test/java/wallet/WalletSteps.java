@@ -25,5 +25,9 @@ public class WalletSteps implements En {
         Then("there should be error message {string}", (String string) -> {
             Assertions.assertEquals(string, cashier.getErrorMessage());
         });
+
+        Then("the balance of my wallet should be ${int}", (Integer int1) -> {
+            Assertions.assertEquals(170, wallet.getBalance(), "Incorrect wallet balance");
+        });
     }
 }
