@@ -6,11 +6,16 @@ public class BadCodeExample {
     private String type;
 
     public static double getPi() {
-        return 3.14;
+        return Math.PI;
     }
 
     public String getType() {
         return type;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type);
     }
 
     @Override
