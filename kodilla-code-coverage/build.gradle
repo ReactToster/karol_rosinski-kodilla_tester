@@ -26,6 +26,11 @@ jacocoTestCoverageVerification {
                 value = 'COVEREDRATIO'
                 minimum = 1.0
             }
+            limit {
+                counter = 'BRANCH'
+                value = 'COVEREDRATIO'
+                minimum = 1.0
+            }
             includes = [
                     'com.kodilla.jacoco.*'
             ]
