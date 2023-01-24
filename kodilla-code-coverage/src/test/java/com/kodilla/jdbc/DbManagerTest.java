@@ -49,6 +49,34 @@ class DbManagerTest {
         statement.close();
     }
 
+    @Test
+    void testSelectUsersAndPosts() throws SQLException {
+        //GIVEN
+        String countQuery = "SELECT COUNT(*) FROM USERS";
+        Statement statement = createStatement();
+        ResultSet rs = statement.executeQuery(countQuery);
+        int count = getRowsCount(rs);
+        insertUsers(statement);
+
+        //WHEN
+        String sqlQuery = "SELECT USERS.FIRSTNAME, USERS.LASTNAME\n" +
+                "FROM USERS\n" +
+                "INNER JOIN POSTS ON USERS.ID=POSTS.USER_ID\n" +
+                "GROUP BY USERS.ID\n" +
+                "HAVING COUNT(*) >= 2;";
+        Statement pStatement = dbManager.getConnection().createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        rs = pStatement.executeQuery(sqlQuery);
+
+        //THEN
+        while (rs.next()) {
+            System.out.println(rs.getString(1) + " " + rs.getString(2));
+        }
+        rs.beforeFirst();
+        int actual = getTrueResultCount(rs);
+
+        Assertions.assertEquals(4, actual);
+    }
+
     private static int getResultsCount(ResultSet rs) throws SQLException {
         int counter = 0;
         while (rs.next()) {
@@ -61,6 +89,14 @@ class DbManagerTest {
         return counter;
     }
 
+    private static int getTrueResultCount(ResultSet rs) throws SQLException {
+        int counter = 0;
+        while (rs.next()) {
+            counter++;
+        }
+        return counter;
+    }
+
     private static final List<AbstractMap.SimpleEntry<String, String>> USERS = List.of(
             new AbstractMap.SimpleEntry<>("Zara", "Ali"),
             new AbstractMap.SimpleEntry<>("Otman", "Use"),
@@ -68,7 +104,7 @@ class DbManagerTest {
             new AbstractMap.SimpleEntry<>("Uli", "Wimer"),
             new AbstractMap.SimpleEntry<>("Oli", "Kosiw")
     );
-    
+
     private void insertUsers(Statement statement) throws SQLException {
         for (AbstractMap.SimpleEntry<String, String> user : USERS) {
             statement.executeUpdate(
