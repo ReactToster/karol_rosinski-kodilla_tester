@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group 'com.kodilla'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation "org.seleniumhq.selenium:selenium-remote-driver:4.8.0"
+    implementation "org.seleniumhq.selenium:selenium-java:4.8.0"
+    implementation platform('org.testcontainers:testcontainers-bom:1.17.6')
+    testImplementation 'org.awaitility:awaitility-scala:4.2.0'
+    testImplementation "org.testcontainers:selenium:1.13.0"
+    testImplementation "org.testcontainers:junit-jupiter:1.17.6"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
